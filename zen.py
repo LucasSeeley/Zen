@@ -55,14 +55,18 @@ def main():
 
                         source.pause_threshold = .5
                         audio = recognizer.listen(source, phrase_time_limit=None, timeout=None)
+
+                        # write to wav file
                         with open(filename, "wb") as f:
                             f.write(audio.get_wav_data())
 
                         text = speech_to_text(filename)
 
+                        # shutdown procedure
                         if text.lower() == "shutdown":
                             exit(0)
 
+                        # response
                         elif text:
 
                             print("You said {}".format(text))
@@ -73,6 +77,6 @@ def main():
             except Exception as e:
                 print(e)
 
-
+# runs the program
 if __name__ == "__main__":
     main()

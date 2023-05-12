@@ -3,7 +3,7 @@ from transformers import pipeline, Conversation
 import pyttsx3
 import speech_recognition as sr
 
-#using DialoGPT
+# using DialoGPT
 chatbot = pipeline(model="microsoft/DialoGPT-medium")
 
 # text to speech engine - hope to later change to another ai model
@@ -42,7 +42,7 @@ def main():
             recognizer = sr.Recognizer()
             # try statement for transcribing any audio and performing all tasks
             try:
-                #transcription = recognizer.recognize_google(audio)
+                # transcription = recognizer.recognize_google(audio)
                 if recognizer.recognize_google(recognizer.listen(source)).lower() == "zen":
                     print("I'm Zen!")
 

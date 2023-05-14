@@ -57,7 +57,10 @@ def predict_class(sentence):
     return return_list
 
 def get_response(intents_list, intents_json):
-    tag = intents_list[0]['intent']
+    if (float)(intents_list[0]['probability']) >= .5:
+        tag = intents_list[0]['intent']
+    else:
+        tag = 'unknown'
     list_of_intents = intents_json['intents']
 
     for i in list_of_intents:

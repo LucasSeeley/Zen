@@ -1,6 +1,10 @@
 {"intents": [
+    {"tag": "unknown",
+    "patterns": [],
+    "responses": ["I'm sorry I don't understand"]},
+
     {"tag": "greetings",
-    "patterns": ["hey", "hi", "what's up zen", "greetings", "hello", "hi zen"],
+    "patterns": ["hey", "hi", "what's up zen", "greetings", "hello", "hi zen", "yo"],
     "responses": ["Hey", "How are you?", "Hey, how are you?", "What's up?", "Yo"]},
 
     {"tag": "goodbye",
@@ -9,7 +13,11 @@
 
     {"tag": "who",
     "patterns": ["Who are you?", "what's your name?", "are you zen?"],
-    "responses": ["I'm Zen. I am a personal voice AI assistant.", "My name is Zen.", "I'm Zen", "My name is Zen. I was created by Lucas Seeley."]},
+    "responses": ["I'm Zen. I am a personal AI voice assistant.", "My name is Zen.", "I'm Zen", "My name is Zen. I was created by Lucas Seeley."]},
+
+    {"tag": "how",
+    "patterns": ["How are you?", "How's life Zen?", "How do you do?", "Are you good?", "Are you feeling okay?", "Are you feeling alright Zen?"],
+    "responses": ["I'm good!", "I'm great!", "Fantastic!", "Amazing!", "I feel incredible!"]},
 
     {"tag": "time",
     "patterns": ["What time is it?", "What is the time?", "what does the clock say?"],
@@ -17,5 +25,14 @@
 
     {"tag": "date",
     "patterns": ["What is today?", "What is the date?", "what day is it Zen?"],
-    "responses": ["The date is {}", "Today's date is {}"]}
+    "responses": ["The date is {}", "Today's date is {}"]},
+
+    {"tag": "userisgood",
+    "patterns": ["I'm good", "Great", "wonderful", "I am doing well", "I am alright", "I'm doing good"],
+    "responses": ["I'm glad to hear that!", "That's great to hear!"]},
+    
+    {"tag": "thanks",
+    "patterns": ["Thank you!", "Much appreciated", "you're the best"],
+    "responses": ["You're Welcome! Is there anything else I can help you with?", "Of course! Is there anything else I can help you with?", "Always! Is there anything else I can help you with?"]}
+
 ]}

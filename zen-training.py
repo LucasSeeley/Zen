@@ -87,9 +87,9 @@ print(train_y)
 
 # model
 model = tf.keras.Sequential()
-model.add(tf.keras.layers.Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
+model.add(tf.keras.layers.Dense(136, input_shape=(len(train_x[0]),), activation='relu'))
 model.add(tf.keras.layers.Dropout(0.5))
-model.add(tf.keras.layers.Dense(64, activation='relu'))
+model.add(tf.keras.layers.Dense(72, activation='relu'))
 model.add(tf.keras.layers.Dropout(0.5))
 model.add(tf.keras.layers.Dense(len(train_y[0]), activation='softmax'))
 
@@ -98,6 +98,6 @@ sgd = tf.keras.optimizers.SGD(learning_rate=0.01, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 # fit & save
-hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, verbose=1)
+hist = model.fit(np.array(train_x), np.array(train_y), epochs=300, verbose=1)
 model.save('zen.h5', hist)
 print('Done')

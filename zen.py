@@ -3,6 +3,7 @@ import random
 import json
 import pickle
 import numpy as np
+from datetime import time, datetime
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -88,7 +89,17 @@ def tts(text):
     engine.say(text)
     engine.runAndWait()
 
+# get current time
+def get_time():
+    now = datetime.now()
+    return now.strftime("%H %M")
 
+# get current day/date
+def get_date():
+    now = datetime.now()
+    return now.strftime("%A, %B %d, %Y")
+
+# main function
 def main():
     # activation loop
     while True:
@@ -125,6 +136,16 @@ def main():
 
                             print("You said {}".format(text))
                             res, tag = generate_response(text)
+
+                            # formatting time into response string
+                            if tag == "time":
+                                time = get_time()
+                                res = res.format(time)
+                            # formatting date into response string
+                            elif tag == "date":
+                                date = get_date()
+                                res = res.format(date)
+
                             tts(res)
 
                             if tag == "goodbye":

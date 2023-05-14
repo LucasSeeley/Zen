@@ -1,0 +1,13 @@
+{"intents": [
+    {"tag": "greetings",
+    "patterns": ["hey", "hi", "what's up zen", "greetings", "hello", "hi zen"],
+    "responses": ["Hey", "How are you?", "Hey, how are you?", "What's up?", "Yo"]},
+
+    {"tag": "goodbye",
+    "patterns": ["bye", "seeya", "later", "toodaloo", "talk to you tomorrow"],
+    "responses": ["Goodbye!", "Toodaloo!", "Talk to you later!"]},
+
+    {"tag": "who",
+    "patterns": ["Who are you?", "what's your name?", "are you zen?"],
+    "responses": ["I'm Zen. I am a personal voice AI assistant.", "My name is Zen.", "I'm Zen", "My name is Zen. I was created by Lucas Seeley."]}
+]}

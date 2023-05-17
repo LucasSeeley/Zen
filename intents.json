@@ -4,7 +4,7 @@
     "responses": ["I'm sorry I don't understand"]},
 
     {"tag": "greetings",
-    "patterns": ["hey", "hi", "what's up zen", "greetings", "hello", "hi zen", "yo"],
+    "patterns": ["hey", "hi", "what's up zen", "greetings", "hello", "hi zen", "yo", "zen"],
     "responses": ["Hey", "How are you?", "Hey, how are you?", "What's up?", "Yo"]},
 
     {"tag": "goodbye",

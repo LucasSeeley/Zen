@@ -3,7 +3,7 @@ import random
 import json
 import pickle
 import numpy as np
-from datetime import time, datetime
+from datetime import datetime
 
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -11,6 +11,8 @@ from nltk.stem import WordNetLemmatizer
 import tensorflow as tf
 import pyttsx3
 import speech_recognition as sr
+
+import tkinter as tk
 
 # lemmatizer is breaking out words in sentences
 lemmatizer = WordNetLemmatizer()
@@ -23,6 +25,15 @@ model = tf.keras.models.load_model('zen.h5')
 
 # text to speech engine - hope to later change to another ai model
 engine = pyttsx3.init()
+
+# construct window
+root = tk.Tk()
+root.title("Zen")
+root.geometry("600x450")
+root.resizable(False, False)
+
+label = tk.Label(root, text="Say 'Zen' to Activate Zen", justify='center')
+label.pack(ipadx=200, ipady=200)
 
 # to clean up the user's input
 def clean_up_sentence(sentence):
@@ -102,61 +113,69 @@ def get_date():
     now = datetime.now()
     return now.strftime("%A, %B %d, %Y")
 
+def zen(recognizer, source):
+    try:
+
+        # listening for user to say "zen"
+        if recognizer.recognize_google(source).lower() == "zen":
+            label.config(text="I'm listening...")
+            listening = True
+
+            # instantiate file location and speak first words
+            filename = "./audio/input.wav"
+            tts("I'm Zen!")
+
+            # main event loop         
+            while listening:
+                
+                source.pause_threshold = .5
+
+                # listen and write audio file
+                with sr.Microphone() as source:
+                    audio = recognizer.listen(source, phrase_time_limit=None, timeout=None)
+
+                    # write to wav file
+                    with open(filename, "wb") as f:
+                        f.write(audio.get_wav_data())
+
+                text = speech_to_text(filename)
+
+                # response
+                if text:
+
+                    print("You said {}".format(text))
+                    res, tag = generate_response(text)
+
+                    # formatting time into response string
+                    if tag == "time":
+                        time = get_time()
+                        res = res.format(time)
+                    # formatting date into response string
+                    elif tag == "date":
+                        date = get_date()
+                        res = res.format(date)
+
+                    tts(res)
+
+                    if tag == "goodbye":
+                        root.destroy()
+                        exit(0)
+
+    except Exception as e:
+        print("error in zen")
+
+
 # main function
 def main():
-    # activation loop
-    while True:
-        print("Say Zen to start speaking...")
 
-        # using speech recognizer's mic as the source
-        with sr.Microphone() as source:
-            # instantiate the recognizer and listen for audio
-            recognizer = sr.Recognizer()
-            # try statement for transcribing any audio and performing all tasks
-            try:
-                # transcription = recognizer.recognize_google(audio)
-                if recognizer.recognize_google(recognizer.listen(source)).lower() == "zen":
-                    print("I'm Zen!")
+    # instantiate recognizer
+    recognizer = sr.Recognizer()
 
-                    # instantiate file location and speak first words
-                    filename = "./audio/input.wav"
-                    tts("I'm Zen!")
-                    
-                    # main loop
-                    while True:
+    with sr.Microphone() as source:
+        recognizer.adjust_for_ambient_noise(source)
 
-                        source.pause_threshold = .5
-                        audio = recognizer.listen(source, phrase_time_limit=None, timeout=None)
-
-                        # write to wav file
-                        with open(filename, "wb") as f:
-                            f.write(audio.get_wav_data())
-
-                        text = speech_to_text(filename)
-
-                        # response
-                        if text:
-
-                            print("You said {}".format(text))
-                            res, tag = generate_response(text)
-
-                            # formatting time into response string
-                            if tag == "time":
-                                time = get_time()
-                                res = res.format(time)
-                            # formatting date into response string
-                            elif tag == "date":
-                                date = get_date()
-                                res = res.format(date)
-
-                            tts(res)
-
-                            if tag == "goodbye":
-                                exit(0)
-
-
-            except Exception as e:
-                print(e)
+    recognizer.listen_in_background(sr.Microphone(), zen)
+    root.mainloop()
 
 # runs the program
 if __name__ == "__main__":

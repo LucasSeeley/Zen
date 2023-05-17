@@ -8,7 +8,7 @@
     "responses": ["Hey", "How are you?", "Hey, how are you?", "What's up?", "Yo"]},
 
     {"tag": "goodbye",
-    "patterns": ["bye zen", "seeya", "later", "toodaloo", "talk to you tomorrow"],
+    "patterns": ["bye zen", "seeya", "later", "toodaloo", "talk to you tomorrow", "goodbye", "bye"],
     "responses": ["Goodbye!", "Toodaloo!", "Talk to you later!"]},
 
     {"tag": "who",
@@ -16,7 +16,7 @@
     "responses": ["I'm Zen. I am a personal AI voice assistant.", "My name is Zen.", "I'm Zen", "My name is Zen. I was created by Lucas Seeley."]},
 
     {"tag": "how",
-    "patterns": ["How are you?", "How's life Zen?", "How do you do?", "Are you good?", "Are you feeling okay?", "Are you feeling alright Zen?"],
+    "patterns": ["how are you?", "How's life Zen?", "How do you do?", "Are you good?", "Are you feeling okay?", "Are you feeling alright Zen?"],
     "responses": ["I'm good!", "I'm great!", "Fantastic!", "Amazing!", "I feel incredible!"]},
 
     {"tag": "time",
@@ -28,11 +28,15 @@
     "responses": ["The date is {}", "Today's date is {}"]},
 
     {"tag": "userisgood",
-    "patterns": ["I'm good", "Great", "wonderful", "I am doing well", "I am alright", "I'm doing good"],
+    "patterns": ["I'm good", "Great", "wonderful", "I am doing well", "I am alright", "I'm doing good", "I am good", "I'm well", "I am happy", "I am excited", "I'm excited", "I'm happy"],
     "responses": ["I'm glad to hear that!", "That's great to hear!"]},
+
+    {"tag": "userkind",
+    "patterns": ["I'm glad to hear that!", "I am glad to hear that!", "happy to hear", "that is great", "that's good", "nice", "glad to hear that", "glad to hear"],
+    "responses": ["Thank you!", "Thanks!", "I know right?"]},
     
     {"tag": "thanks",
-    "patterns": ["Thank you!", "Much appreciated", "you're the best"],
+    "patterns": ["Thank you!", "Much appreciated", "you're the best", "you are amazing Zen", "you're great", "you're the coolest", "you are cool Zen"],
     "responses": ["You're Welcome! Is there anything else I can help you with?", "Of course! Is there anything else I can help you with?", "Always! Is there anything else I can help you with?"]}
 
 ]}

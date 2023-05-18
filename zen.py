@@ -7,6 +7,9 @@ from datetime import datetime
 
 import nltk
 from nltk.stem import WordNetLemmatizer
+nltk.download('punkt')
+nltk.download('wordnet')
+
 
 import tensorflow as tf
 import pyttsx3
@@ -90,7 +93,7 @@ def speech_to_text(filename):
     try:
         return recognizer.recognize_google(audio)
     except:
-        print("Unknown Error in Speech to Text")
+        return False
 
 # creating dialog with the AI chatbot
 def generate_response(input):
@@ -117,8 +120,7 @@ def zen(recognizer, source):
     try:
 
         # listening for user to say "zen"
-        if recognizer.recognize_google(source).lower() == "zen":
-            label.config(text="I'm listening...")
+        if recognizer.recognize_google(source).lower() == "hello":
             listening = True
 
             # instantiate file location and speak first words
@@ -127,17 +129,18 @@ def zen(recognizer, source):
 
             # main event loop         
             while listening:
-                
+                label.config(text="I'm listening...")
                 source.pause_threshold = .5
 
                 # listen and write audio file
                 with sr.Microphone() as source:
-                    audio = recognizer.listen(source, phrase_time_limit=None, timeout=None)
+                    audio = recognizer.listen(source, phrase_time_limit=None, timeout=3)
 
                     # write to wav file
                     with open(filename, "wb") as f:
                         f.write(audio.get_wav_data())
 
+                label.config(text="Processing...")
                 text = speech_to_text(filename)
 
                 # response
@@ -162,7 +165,7 @@ def zen(recognizer, source):
                         exit(0)
 
     except Exception as e:
-        print("error in zen")
+        print(e)
 
 
 # main function

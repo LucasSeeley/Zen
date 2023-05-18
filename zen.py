@@ -120,7 +120,7 @@ def zen(recognizer, source):
     try:
 
         # listening for user to say "zen"
-        if recognizer.recognize_google(source).lower() == "hello":
+        if recognizer.recognize_google(source).lower() == "zen":
             listening = True
 
             # instantiate file location and speak first words
